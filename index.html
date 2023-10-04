@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+
+        body {
+            background-color: darkgray;
+            background-color: darkgray;
+        }
+        .container {
+            width: 90%;
+            text-align: center;
+            padding: 20px;
+            margin-top: 100px;
+            font-size: 30px;
+        }
+
+        input {
+            border-color: lawngreen;
+            border-radius: 50px;
+            width: 100px;
+            height: 60px;
+            padding: 30px;
+            margin: auto;
+            font-size: 30px;
+            background-color: lightgray;
+        }
+
+        button {
+            border-color: lawngreen;
+            border-radius: 50px;
+            width: 50%;
+            height: 50px;
+            font-size: 20px;
+            background-color: lightgray;
+        }
+
+    </style>
+    <title>BMI</title>
+</head>
+<body>
+
+<div class="container">
+
+    <form id="BMI-form">
+        <label for="weight">Enter your weight:</label>
+        <input type="number" id="weight" name="weight" required>
+        <br><br>
+
+        <label for="height">Enter your height:</label>
+        <input type="number" id="height" name="weight" required>
+        <br><br>
+
+        <button type="button" value="Calculate BMI" id="bmiButton" onclick="calculateBMI()">Calculate BMI</button>
+    </form>
+
+    <h3>Your BMI:</h3>
+    <p id="result">-</p>
+    <p id="description"></p>
+
+    <script>
+        function calculateBMI() {
+            const height = document.getElementById("height").value / 100;
+            const weight = document.getElementById("weight").value;
+            const bmi = weight / (height * height);
+
+            let bmiError = "";
+
+            if (!height || !weight || height <= 0 || weight <= 0) {
+                bmiError = "Enter correct weight and height";
+                document.getElementById("result").innerText = bmiError;
+            } else {
+                document.getElementById("result").innerText = bmi.toFixed(2);
+            }
+
+
+            let descriptionElement = document.getElementById("description");
+
+            if (bmi == 0) {
+                bmiDesc = "Enter correct weight and height"
+                descriptionElement.style.color = "red";
+            } else if (bmi < 16) {
+                bmiDesc = "starvation";
+                descriptionElement.style.color = "orange"
+            } else if (bmi < 16.99) {
+                bmiDesc = "emaciation";
+                descriptionElement.style.color = "yellow";
+            } else if (bmi < 18.49) {
+                bmiDesc = "underweight";
+                descriptionElement.style.color = "darkyellow";
+            } else if (bmi < 24.99) {
+                bmiDesc = "correct value";
+                descriptionElement.style.color = "green";
+            } else if (bmi < 29.99) {
+                bmiDesc = "overweight";
+                descriptionElement.style.color = "lightred";
+            } else if (bmi < 34.99) {
+                bmiDesc = "first degree obesity";
+                descriptionElement.style.color = "red";
+            } else if (bmi < 39.99) {
+                bmiDesc = "class II obesity";
+                descriptionElement.style.color = "brown";
+            } else {
+                bmiDesc= "III degree obesity";
+                descriptionElement.style.color = "darkred";
+            }
+
+            if (!bmiError)
+            document.getElementById("description").innerText = bmiDesc;
+        }
+    </script>
+
+</div>
+
+</body>
+</html>
